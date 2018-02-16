@@ -43,7 +43,7 @@ class BaseCharacter {
 				clearInterval(_this.id);
 			}
 
-		}, 50);
+		}, 60);
 	}
 
 	die(){
@@ -73,16 +73,19 @@ class BaseCharacter {
 		_this.id = setInterval(
 			function(){
 				if (i == 1){
+					_this.element.getElementsByClassName("effect-image")[0].style.display = "block";
 					_this.element.getElementsByClassName("hp-text")[0].classList.add("healed");
 					_this.element.getElementsByClassName("hp-text")[0].textContent = healAmount;
 				}
+				_this.element.getElementsByClassName("effect-image")[0].src = "images/effect/heal/" + i + ".png";
 				i++;
-				if (i > 10){
+				if (i > 8){
+					_this.element.getElementsByClassName("effect-image")[0].style.display = "none";
 					_this.element.getElementsByClassName("hp-text")[0].classList.remove("healed");
 					_this.element.getElementsByClassName("hp-text")[0].textContent = "";
 					clearInterval(_this.id);
 				}
-		}, 50);
+		}, 60);
 	}
 }
 
