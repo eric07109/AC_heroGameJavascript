@@ -148,6 +148,18 @@ function addActionsEvent(){
 	heal.onclick = function(){
 		healHero();
 	}
+
+	window.addEventListener("keydown", function(event){
+	switch(event.code){
+		case "KeyD":
+			healHero();
+			break;
+		case "KeyA":
+			heroAttack();
+			break;
+		}
+	})
+
 }
 addActionsEvent();
 
@@ -216,3 +228,4 @@ function finish(){
 		dialog.classList.add("lose");
 	}
 }
+
