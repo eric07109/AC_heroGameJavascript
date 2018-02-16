@@ -27,8 +27,8 @@ class BaseCharacter {
 
 			if (i == 1){
 				_this.element.getElementsByClassName("effect-image")[0].style.display = "block";
-				_this.element.getElementsByClassName("hurt-text")[0].classList.add("attacked");
-				_this.element.getElementsByClassName("hurt-text")[0].textContent = damage;
+				_this.element.getElementsByClassName("hp-text")[0].classList.add("attacked");
+				_this.element.getElementsByClassName("hp-text")[0].textContent = damage;
 			}
 
 			_this.element.getElementsByClassName("effect-image")[0].src = "images/effect/blade/" + i + ".png";
@@ -38,8 +38,8 @@ class BaseCharacter {
 
 			if (i > 8){
 				_this.element.getElementsByClassName("effect-image")[0].style.display = "none";
-				_this.element.getElementsByClassName("hurt-text")[0].classList.remove("attacked");
-				_this.element.getElementsByClassName("hurt-text")[0].textContent = "";
+				_this.element.getElementsByClassName("hp-text")[0].classList.remove("attacked");
+				_this.element.getElementsByClassName("hp-text")[0].textContent = "";
 				clearInterval(_this.id);
 			}
 
@@ -56,11 +56,33 @@ class BaseCharacter {
 	}
 
 	heal(){
-		this.hp += 30
-		if (this.hp > this.maxHP){
-			this.hp = this.maxHP
+		var hpLoss = (this.maxHP - this.hp);
+		var healAmount = 0;
+		if (hpLoss < 30){
+			healAmount = hpLoss;
+		}else{
+			healAmount = 30;
 		}
+
+		this.hp += healAmount;
 		this.updateHTML(this.hpElement, this.hurtElement);
+		
+		var i = 1;
+		var _this = this;
+
+		_this.id = setInterval(
+			function(){
+				if (i == 1){
+					_this.element.getElementsByClassName("hp-text")[0].classList.add("healed");
+					_this.element.getElementsByClassName("hp-text")[0].textContent = healAmount;
+				}
+				i++;
+				if (i > 10){
+					_this.element.getElementsByClassName("hp-text")[0].classList.remove("healed");
+					_this.element.getElementsByClassName("hp-text")[0].textContent = "";
+					clearInterval(_this.id);
+				}
+		}, 50);
 	}
 }
 
@@ -121,7 +143,6 @@ function addActionsEvent(){
 		heroAttack();
 	}
 	heal.onclick = function(){
-		console.log("heal pressed");
 		healHero();
 	}
 }

@@ -123,11 +123,10 @@
 
 /* 設定transition class */
 /* 給 .hurt-text.attacked 使用*/
-#hero-image-block    .character-block .hurt-text,
-#monster-image-block .character-block .hurt-text {
+#hero-image-block    .character-block .hp-text,
+#monster-image-block .character-block .hp-text {
   position: absolute;
   font-size: 60px;
-  color: red;
   width: 100%;
   left: 0px;
   bottom: 50px;
@@ -135,8 +134,14 @@
   transition: bottom 500ms;
 }
 
-#hero-image-block    .character-block .hurt-text.attacked,
-#monster-image-block .character-block .hurt-text.attacked {
+#hero-image-block    .character-block .hp-text.attacked,
+#monster-image-block .character-block .hp-text.attacked {
+  color: red;
+  bottom: 150px;
+}
+
+#hero-image-block    .character-block .hp-text.healed{
+  color: green;
   bottom: 150px;
 }
 
