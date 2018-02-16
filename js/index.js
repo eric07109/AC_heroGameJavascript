@@ -54,6 +54,14 @@ class BaseCharacter {
 		hpElement.textContent = this.hp;
 		hurtElement.style.width = (100- (this.hp/this.maxHP)*100) + "%";
 	}
+
+	heal(){
+		this.hp += 30
+		if (this.hp > this.maxHP){
+			this.hp = this.maxHP
+		}
+		this.updateHTML(this.hpElement, this.hurtElement);
+	}
 }
 
 class Hero extends BaseCharacter {
@@ -106,18 +114,24 @@ class Monster extends BaseCharacter {
   	}
 }
 
-function addSkillEvent(){
+function addActionsEvent(){
 	var skill = document.getElementById("skill");
+	var heal = document.getElementById("heal");
 	skill.onclick = function(){
 		heroAttack();
 	}
+	heal.onclick = function(){
+		console.log("heal pressed");
+		healHero();
+	}
 }
-addSkillEvent();
+addActionsEvent();
 
 function heroAttack(){
 	//document.getElementsByClassName("skill-block")[0].style.display = "none";
 	//why not use getElementById("skill")?
 	document.getElementById("skill").style.display = "none";
+	document.getElementById("heal").style.display = "none";
 	setTimeout(function(){
 		hero.element.classList.add("attacking");
 		setTimeout(function(){
@@ -138,6 +152,7 @@ function heroAttack(){
 				}else{
 					//document.getElementsByClassName("skill-block")[0].style.display = "block";
 					document.getElementById("skill").style.display = "inline";
+					document.getElementById("heal").style.display = "inline";
 				}
 
 			}, 500);
@@ -148,6 +163,15 @@ function heroAttack(){
 	}, 1100);
 }
 
+function healHero(){
+	//hide button
+	document.getElementById("heal").style.display = "none";
+	//heal hero
+	hero.heal();
+	//show button
+	document.getElementById("heal").style.display = "inline";
+	endTurn()
+}
 
 var rounds = 10;
 

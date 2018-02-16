@@ -142,9 +142,19 @@
 
 #hero-image-block .skill-block {
   position: relative;
+  display: inline;
 }
 
 #hero-image-block .skill-image {
+  width: 20%;
+}
+
+#hero-image-block .heal-block {
+  position: relative;
+  display: inline;
+}
+
+#hero-image-block .heal-image {
   width: 20%;
 }
 
